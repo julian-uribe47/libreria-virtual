@@ -47,6 +47,7 @@
     margin-bottom: 20px;
     margin-right: 20px;
     overflow: hidden;
+    max-width: 300px;
   }
   
   .card p {
@@ -60,4 +61,5 @@
   
   .card img {
     width: 100%;
+    
   }

@@ -1,46 +1,53 @@
 import { useState } from 'react'
+import { BookGrid } from './BookGrid';
+import { getGenres } from '../helpers/getBooks';
 
 
 export const VirtualLibrery = () => {
+    const genres = getGenres();
+    const [genSelected, setGenSelected] = useState('todos')
 
-    const [genres, setGenres] = useState(['todos']);
+  
 
-    console.log(genres)
-
-
+  const onChangeSelect = (selectValue) => {
+      setGenSelected(selectValue);
+  }
   return (
     <>
-      <h1>VirtualLibrery</h1>
+      <h1>VirtualLibrary</h1>
       <label>
       Elige un género literario:
       <select 
-        value={'Todos'}
+        value={genSelected}
         name='selectedGenre'
-        onChange={e => setGenres(e.target.value)}
+        onChange={e => onChangeSelect(e.target.value)}
         >
         
         <option
         value='todos'
         >Todos</option>
-        <option value='ciencia ficcion'>Ciencia ficción</option>
-        <option value='fantasia'>Fantasía</option>
-        <option value='terror'>Terror</option>
-        <option value='zombies'>Zombies</option>
+       {
+        genres.map((gen) => {
+          return (
+            <option
+            name= {gen}
+            value={gen}
+            key={gen}
+            >{gen}</option>
+          )
+        })
+       }
       </select>
     </label>
-
-    <ol>
-        {genres.map( gen => 
-            (
-                <div key={gen}>
-                    <h3>{gen}</h3>
-                    <li >{gen}</li>
-                </div>
-            )
-        )
-        }
-    </ol>
+     
+    
+    <BookGrid />
+    
     </>
     
   )
 }
+                // <div key={gen}>
+                //     <h3>{gen}</h3>
+                //     <li >{gen}</li>
+                // </div>
