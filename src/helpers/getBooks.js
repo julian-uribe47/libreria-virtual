@@ -1,5 +1,5 @@
 import books from "../data/books.json";
-export const getBooks =  () => {
+export const getBooks = () => {
   const libros = books.library.map((libro) => {
     return {
       titulo: libro.book.title,
@@ -11,20 +11,24 @@ export const getBooks =  () => {
   return libros;
 };
 
-
-
 export const getGenres = () => {
-  const allGenres = []
+  const allGenres = [];
   const allBooks = getBooks();
-  allBooks.map( (book) => {
-    if (!(allGenres.includes(book.genero))) {
-      allGenres.push(book.genero)
-
+  allBooks.map((book) => {
+    if (!allGenres.includes(book.genero)) {
+      allGenres.push(book.genero);
     }
-  } )
+  });
+  // console.log(allGenres)
   return allGenres;
-
-  
-    
+};
+export const filterBooksByGenre = (genero) => {
+    const bookFilter = getBooks();
+    if(genero !== "todos") {
+      const booksGenre = bookFilter.filter(book => book.genero === genero);
+      // console.log(booksGenre);
+      return booksGenre;
+    }
+    return bookFilter
 }
-
+filterBooksByGenre();
