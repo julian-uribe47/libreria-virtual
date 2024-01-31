@@ -7,7 +7,7 @@ export const getBooks = () => {
       cubierta: libro.book.cover,
     };
   });
-  // console.log(libros);
+  // console.log(libros)
   return libros;
 };
 
@@ -19,16 +19,21 @@ export const getGenres = () => {
       allGenres.push(book.genero);
     }
   });
-  // console.log(allGenres)
   return allGenres;
 };
 export const filterBooksByGenre = (genero) => {
     const bookFilter = getBooks();
     if(genero !== "todos") {
       const booksGenre = bookFilter.filter(book => book.genero === genero);
-      // console.log(booksGenre);
       return booksGenre;
     }
     return bookFilter
 }
 filterBooksByGenre();
+
+
+
+
+
+
+

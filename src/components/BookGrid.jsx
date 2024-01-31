@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
-import { filterBooksByGenre,  } from "../helpers/getBooks";
+import { filterBooksByGenre } from "../helpers/getBooks";
 
-export const BookGrid = ({ gen }) => {
-  let allBooks = filterBooksByGenre(gen);
+export const BookGrid = ({ allBooks, gen }) => {
+  
 
-  // console.log(getBooks())
 
   return (
     <>
@@ -12,7 +11,9 @@ export const BookGrid = ({ gen }) => {
       <div className="card-grid">
         {allBooks.map((book, index) => {
           return (
-            <div className="card" key={index}>
+            <div 
+            className="card" 
+            key={index}>
               <p>{book.titulo}</p>
               <img src={book.cubierta} alt="cubierta libro" />
             </div>
