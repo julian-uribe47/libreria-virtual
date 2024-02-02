@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { BookGrid } from "./BookGrid";
-import { filterBooksByGenre, getBooks, getGenres } from "../helpers/getBooks";
-import { BookAside } from "./BookAside";
+import { filterBooksByGenre, getGenres } from "../helpers/getBooks";
+
+
 
 export const VirtualLibrery = () => {
   const genres = getGenres();
-  const numBook = getBooks();
-  console.log(numBook.length);
   const [genSelected, setGenSelected] = useState("todos");
   let allBooks = filterBooksByGenre(genSelected);
   const [counter, setCounter] = useState(allBooks.length);
@@ -15,12 +14,11 @@ export const VirtualLibrery = () => {
     setGenSelected(selectValue);
   };
   useEffect(() => {
-    setCounter(allBooks.length)
-  }, [allBooks])
-  
+    setCounter(allBooks.length);
+  }, [allBooks]);
 
   return (
-    <>
+    
       <div className="ml-10">
         <h1>VirtualLibrary</h1>
         <div className=" flex justify-between items-center ">
@@ -45,10 +43,10 @@ export const VirtualLibrery = () => {
           </select>
         </label>
 
-        <BookAside />
+        
 
         <BookGrid allBooks={allBooks} gen={genSelected} />
       </div>
-    </>
+    
   );
 };

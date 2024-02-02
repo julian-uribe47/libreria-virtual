@@ -1,19 +1,24 @@
-import PropTypes from "prop-types";
-import { filterBooksByGenre } from "../helpers/getBooks";
+import { useContext } from 'react';
+import { virtualLibraryContext } from '../context';
 
 export const BookGrid = ({ allBooks, gen }) => {
-  
+
+  const context = useContext(virtualLibraryContext)
+  const openAside = () => {
+    context.openBookAside();
+    context.setCount(context.count + 1)
+  }
 
 
   return (
     <>
       <h3>{gen}</h3>
-      <div className="card-grid">
+      <div
+      onClick={ () => openAside()}
+      className="card-grid">
         {allBooks.map((book, index) => {
           return (
-            <div 
-            className="card" 
-            key={index}>
+            <div className="card" key={index}>
               <p>{book.titulo}</p>
               <img src={book.cubierta} alt="cubierta libro" />
             </div>
@@ -24,6 +29,4 @@ export const BookGrid = ({ allBooks, gen }) => {
   );
 };
 
-BookGrid.propTypes = {
-  gen: PropTypes.string,
-};
+
