@@ -5,9 +5,10 @@ export const getBooks = () => {
       titulo: libro.book.title,
       genero: libro.book.genre,
       cubierta: libro.book.cover,
+      id: libro.book.ISBN
     };
   });
-  // console.log(libros)
+  
   return libros;
 };
 

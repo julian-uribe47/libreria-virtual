@@ -9,6 +9,7 @@ export const VirtualLibrery = () => {
   const [genSelected, setGenSelected] = useState("todos");
   let allBooks = filterBooksByGenre(genSelected);
   const [counter, setCounter] = useState(allBooks.length);
+  
 
   const onChangeSelect = (selectValue) => {
     setGenSelected(selectValue);
@@ -45,7 +46,7 @@ export const VirtualLibrery = () => {
 
         
 
-        <BookGrid allBooks={allBooks} gen={genSelected} />
+        <BookGrid allBooks={allBooks} gen={genSelected}/>
       </div>
     
   );
