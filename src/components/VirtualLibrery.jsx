@@ -1,40 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BookGrid } from "./BookGrid";
-import { filterBooksByGenre, getGenres } from "../helpers/getBooks";
+import { virtualLibraryContext } from "../context";
+import { useContext } from "react";
+
 
 
 
 export const VirtualLibrery = () => {
-  const genres = getGenres();
-  const [genSelected, setGenSelected] = useState("todos");
-  let allBooks = filterBooksByGenre(genSelected);
-  const [counter, setCounter] = useState(allBooks.length);
-  
+  const context = useContext(virtualLibraryContext);
 
   const onChangeSelect = (selectValue) => {
-    setGenSelected(selectValue);
+    context.setGenSelected(selectValue);
   };
   useEffect(() => {
-    setCounter(allBooks.length);
-  }, [allBooks]);
+    context.setCounter(context.counter);
+    
+  }, [context.counter]);
 
   return (
     
       <div className="ml-10">
         <h1>VirtualLibrary</h1>
         <div className=" flex justify-between items-center ">
-          <h2 className=" font-semibold">Libros disponibles: {counter} </h2>
+          <h2 className=" font-semibold">Libros disponibles: {context.counter} </h2>
         </div>
         <label className=" font-medium">
           Elige un género literario:
           <select
-            value={genSelected}
+            value={context.genSelected}
             name="selectedGenre"
             onChange={(e) => onChangeSelect(e.target.value)}
             className=" font-medium ml-2"
           >
             <option value="todos">Todos</option>
-            {genres.map((gen, index) => {
+            {context.genres.map((gen, index) => {
               return (
                 <option name={gen} value={gen} key={index}>
                   {gen}
@@ -46,7 +45,7 @@ export const VirtualLibrery = () => {
 
         
 
-        <BookGrid allBooks={allBooks} gen={genSelected}/>
+        <BookGrid allBooks={context.allBooks} gen={context.genSelected}/>
       </div>
     
   );

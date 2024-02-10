@@ -4,14 +4,19 @@ import { virtualLibraryContext } from '../context';
 export const BookGrid = ({ allBooks, gen }) => {
   
   const context = useContext(virtualLibraryContext)
+  
   const openAside = (bookDetail) => {
     context.openBookAside()
-    const isInLibrary = context.bookToShow.filter(book => book.id == bookDetail.id).length > 0;
-    console.log(isInLibrary);
+    const isInLibrary = context.bookToShow.filter(book => book.id === bookDetail.id).length > 0;
+    const newBooks = allBooks.filter(newBook => newBook != bookDetail);
+    
     if (!isInLibrary) {
       
         context.setBookToShow([...context.bookToShow, bookDetail])
-        context.setCount(context.count + 1)
+        context.setCounter(context.counter - 1)
+        context.setCount(context.bookToShow.length + 1)
+        
+        console.log(newBooks);
       
     }
   }
