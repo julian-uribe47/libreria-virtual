@@ -5,9 +5,11 @@ export const virtualLibraryContext = createContext()
 
 export const VirtualLibraryProvider = ({children}) => {
 
-    const genres = getGenres();
     const [genSelected, setGenSelected] = useState("todos");
-    let allBooks = filterBooksByGenre(genSelected);
+    const [allBooks, setAllBooks] = useState(filterBooksByGenre(genSelected))
+
+    const genres = getGenres();
+    
     //contador de libros disponibles 
     const [counter, setCounter] = useState(allBooks.length);
 
@@ -35,6 +37,7 @@ export const VirtualLibraryProvider = ({children}) => {
             genSelected,
             setGenSelected,
             allBooks,
+            setAllBooks,
             counter,
             setCounter
 

@@ -16,7 +16,7 @@ export const BookGrid = ({ allBooks, gen }) => {
         context.setCounter(context.counter - 1)
         context.setCount(context.bookToShow.length + 1)
         
-        console.log(newBooks);
+        context.setAllBooks(newBooks);
       
     }
   }

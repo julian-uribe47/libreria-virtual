@@ -16,7 +16,7 @@ export const BookAside = () => {
     >
       <div className=" flex justify-between items-center p-6 bg-white">
         <h2 className=" font-semibold text-xl bg-white">
-          Lista de lectura: {context.count}
+          Lista de lectura 
         </h2>
         <div>
           <XCircleIcon
