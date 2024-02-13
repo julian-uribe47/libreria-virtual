@@ -30,8 +30,7 @@ export const BookAside = () => {
           context.bookToShow.map( (book) => (
             <BookList 
             key={book.id}
-            titulo={book.titulo}
-            cubierta={book.cubierta}
+            book={book}
             />
           ))
         }

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { BookGrid } from "./BookGrid";
 import { virtualLibraryContext } from "../context";
 import { useContext } from "react";
-
+import { filterBooksByGenre } from "../helpers/getBooks"; 
 
 
 
@@ -11,6 +11,8 @@ export const VirtualLibrery = () => {
 
   const onChangeSelect = (selectValue) => {
     context.setGenSelected(selectValue);
+    const filterBooks = filterBooksByGenre(selectValue)
+    context.setAllBooks(filterBooks)
     
   };
   useEffect(() => {
