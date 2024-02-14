@@ -1,54 +1,59 @@
-import { createContext, useState } from 'react';
+import { createContext, useState } from "react";
 import { filterBooksByGenre, getGenres } from "../helpers/getBooks";
 
-export const virtualLibraryContext = createContext()
+export const virtualLibraryContext = createContext();
 
-export const VirtualLibraryProvider = ({children}) => {
+export const VirtualLibraryProvider = ({ children }) => {
+  const [genSelected, setGenSelected] = useState("todos");
+  let storageList = localStorage.getItem("bookList");
+  if (storageList) {
+    storageList = JSON.parse(storageList);
+  } else {
+    storageList = [];
+  }
 
-    const [genSelected, setGenSelected] = useState("todos");
-    const [allBooks, setAllBooks] = useState(filterBooksByGenre(genSelected))
+  const [bookToShow, setBookToShow] = useState(storageList);
+  //counter del Aside
+  const [count, setCount] = useState(bookToShow.length);
 
-    const genres = getGenres();
-    
-    //contador de libros disponibles 
-    const [counter, setCounter] = useState(allBooks.length);
+  let defaultBooks = filterBooksByGenre(genSelected);
+  const booksId = storageList.map((book) => book.id);
+  defaultBooks = defaultBooks.filter((book) => !booksId.includes(book.id));
 
-    //Abrir y cerrar Aside
-    const [isBookAsideOpen, setIsBookAsideOpen] = useState(false)
-    const openBookAside = () => setIsBookAsideOpen(true);
-    const closeBookAside = () => setIsBookAsideOpen(false)
-    
-    //Agregar y mostrar productos en Aside
-    let storageList = localStorage.getItem('bookList')
-    if (storageList) {
-        storageList = JSON.parse(storageList)
-    }else{
-        storageList = [];
-    }
-    console.log(storageList);
-    const [bookToShow, setBookToShow] = useState(storageList)
-    //counter del Aside
-    const [count, setCount] = useState(bookToShow.length)
+  const [allBooks, setAllBooks] = useState(defaultBooks);
 
-    return(
-        <virtualLibraryContext.Provider value={{
-            count,
-            setCount,
-            isBookAsideOpen,
-            openBookAside,
-            closeBookAside,
-            bookToShow,
-            setBookToShow,
-            genres,
-            genSelected,
-            setGenSelected,
-            allBooks,
-            setAllBooks,
-            counter,
-            setCounter
+  const genres = getGenres();
 
-        }}>
-            {children}
-        </virtualLibraryContext.Provider>
-    )
-}
+  //contador de libros disponibles
+  const [counter, setCounter] = useState(allBooks.length);
+
+  //Abrir y cerrar Aside
+  const [isBookAsideOpen, setIsBookAsideOpen] = useState(false);
+  const openBookAside = () => setIsBookAsideOpen(true);
+  const closeBookAside = () => setIsBookAsideOpen(false);
+
+  //Agregar y mostrar productos en Aside
+
+  return (
+    <virtualLibraryContext.Provider
+      value={{
+        count,
+        setCount,
+        isBookAsideOpen,
+        openBookAside,
+        closeBookAside,
+        bookToShow,
+        setBookToShow,
+        genres,
+        genSelected,
+        setGenSelected,
+        allBooks,
+        setAllBooks,
+        counter,
+        setCounter,
+      }}
+    >
+      {children}
+    </virtualLibraryContext.Provider>
+  );
+};

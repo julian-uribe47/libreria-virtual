@@ -6,8 +6,7 @@ import { BookList } from "./BookList";
 
 export const BookAside = () => {
   const context = useContext(virtualLibraryContext);
-  
-console.log(context.bookToShow)
+
   return (
     <aside
       className={`${
@@ -15,9 +14,7 @@ console.log(context.bookToShow)
       } book-aside flex-col top-20 fixed right-0 border border-black rounded-lg bg-white`}
     >
       <div className=" flex justify-between items-center p-6 bg-white">
-        <h2 className=" font-semibold text-xl bg-white">
-          Lista de lectura 
-        </h2>
+        <h2 className=" font-semibold text-xl bg-white">Lista de lectura</h2>
         <div>
           <XCircleIcon
             onClick={() => context.closeBookAside()}
@@ -25,15 +22,10 @@ console.log(context.bookToShow)
           />
         </div>
       </div>
-      <div className=' overflow-y-scroll'>
-        {
-          context.bookToShow.map( (book) => (
-            <BookList 
-            key={book.id}
-            book={book}
-            />
-          ))
-        }
+      <div className=" overflow-y-scroll">
+        {context.bookToShow.map((book) => (
+          <BookList key={book.id} book={book} />
+        ))}
       </div>
     </aside>
   );
