@@ -11,8 +11,9 @@ export const BookGrid = ({ allBooks, gen }) => {
     const newBooks = allBooks.filter(newBook => newBook != bookDetail);
     
     if (!isInLibrary) {
-      
-        context.setBookToShow([...context.bookToShow, bookDetail])
+        const listUpdated = [...context.bookToShow, bookDetail]
+        context.setBookToShow(listUpdated)
+        localStorage.setItem('bookList', JSON.stringify(listUpdated))
         context.setCounter(context.counter - 1)
         context.setCount(context.bookToShow.length + 1)
         
@@ -20,7 +21,7 @@ export const BookGrid = ({ allBooks, gen }) => {
       
     }
   }
-  console.log('BOOK:', context.bookToShow)
+  
   
     
     

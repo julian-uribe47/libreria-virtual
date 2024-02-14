@@ -7,7 +7,7 @@ import { BookList } from "./BookList";
 export const BookAside = () => {
   const context = useContext(virtualLibraryContext);
   
-
+console.log(context.bookToShow)
   return (
     <aside
       className={`${

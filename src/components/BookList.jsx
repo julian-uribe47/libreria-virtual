@@ -10,6 +10,7 @@ export const BookList = ({book}) => {
     const handledelete = (titulo) => {
       const removeBooks = context.bookToShow.filter(book => book.titulo != titulo)
       context.setBookToShow(removeBooks)
+      localStorage.setItem('bookList', JSON.stringify(removeBooks))
       context.setCount(context.bookToShow.length - 1)
       context.setCounter(context.counter + 1)
       const allBooksUpdate = context.allBooks

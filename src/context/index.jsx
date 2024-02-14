@@ -19,8 +19,14 @@ export const VirtualLibraryProvider = ({children}) => {
     const closeBookAside = () => setIsBookAsideOpen(false)
     
     //Agregar y mostrar productos en Aside
-    
-    const [bookToShow, setBookToShow] = useState([])
+    let storageList = localStorage.getItem('bookList')
+    if (storageList) {
+        storageList = JSON.parse(storageList)
+    }else{
+        storageList = [];
+    }
+    console.log(storageList);
+    const [bookToShow, setBookToShow] = useState(storageList)
     //counter del Aside
     const [count, setCount] = useState(bookToShow.length)
 
